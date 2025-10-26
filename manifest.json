@@ -1,0 +1,13 @@
+{
+  "name": "Romantic Choice",
+  "short_name": "LoveApp",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffb6c1",
+  "theme_color": "#ff69b4",
+  "description": "A cute romantic interactive PWA!",
+  "icons": [
+    {"src": "https://i.pinimg.com/originals/b6/a6/d5/b6a6d50de7eb36065b98ebd254d46cd5.jpg","sizes": "192x192","type": "image/png"},
+    {"src": "https://i.pinimg.com/originals/b6/a6/d5/b6a6d50de7eb36065b98ebd254d46cd5.jpg","sizes": "512x512","type": "image/png"}
+  ]
+}

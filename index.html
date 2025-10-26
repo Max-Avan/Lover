@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Romantic Choice PWA</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffb6c1">
+<style>
+  body {margin: 0;height: 100vh;display: flex;justify-content: center;align-items: center;background-image: url('https://i.pinimg.com/originals/b6/a6/d5/b6a6d50de7eb36065b98ebd254d46cd5.jpg');background-size: cover;background-position: center;font-family: 'Poppins', sans-serif;color: #fff;overflow: hidden;padding: 5vw;}
+  .container {text-align: center;backdrop-filter: blur(10px);background-color: rgba(255, 192, 203, 0.25);padding: 6vw;border-radius: 8vw;box-shadow: 0 0 25px rgba(255, 105, 180, 0.4);width: 100%;max-width: 450px;}
+  button {background: linear-gradient(45deg, #ff6ec4, #7873f5);border: none;border-radius: 8vw;color: white;padding: 4vw 8vw;font-size: 4vw;cursor: pointer;margin: 2vw;transition: transform 0.2s ease, box-shadow 0.3s ease;}
+  button:hover {transform: scale(1.1);box-shadow: 0 0 15px #ffb6c1;}
+  .hidden { display: none; }
+  .display-romantic {text-align: center;font-size: 4vw;color: #fff0f5;background: rgba(255, 182, 193, 0.3);border-radius: 8vw;padding: 6vw;margin-top: 3vw;box-shadow: 0 0 30px rgba(255, 192, 203, 0.6);animation: fadeIn 1s ease forwards, float 3s ease-in-out infinite;}
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  @keyframes heartbeat { 0% { transform: scale(1); } 25% { transform: scale(1.3); } 50% { transform: scale(1); } 75% { transform: scale(1.3); } 100% { transform: scale(1); } }
+  .heart { font-size: 15vw; animation: heartbeat 1s infinite; }
+  .sad { font-size: 13vw; }
+  .again-btn {background: linear-gradient(45deg, #ff8ebf, #f58fff);font-size: 3.5vw;padding: 3.5vw 8vw;border-radius: 25px;margin-top: 5vw;box-shadow: 0 0 10px rgba(255, 192, 203, 0.6);}
+  @media (max-width: 400px) {h2 { font-size: 5vw; } button { font-size: 4.5vw; padding: 3.5vw 7vw; }}
+  @media (min-width: 600px) { button { font-size: 18px; } .display-romantic, h2 { font-size: 20px; }}
+</style>
+</head>
+<body>
+<div class="container" id="main">
+  <button id="startBtn">💖 နိပ်ပါချစ်ကလေးရေ 💖</button>
+  <div id="step1" class="hidden">
+    <h2>ကိုကို့ကို ချစ်ပါသလား</h2>
+    <button id="option1">ချစ်ဘူးဆိုနိပ်</button>
+    <button id="option2">ချစ်တယ်ဆိုနိပ်</button>
+  </div>
+  <div id="step2a" class="hidden">
+    <h2>ကဲ နောက်တစ်ခေါက်ထပ်မေးမယ် သေချာဖြေနော် ချစ်လား ချစ်ဘူးလား</h2>
+    <button id="option1a">ချစ်တယ်ဆိုနိပ်</button>
+    <button id="option1b">ချစ်ဘူးဆိုနိပ်</button>
+  </div>
+  <div id="textBoxStep" class="hidden">
+    <div class="display-romantic">
+      <h2 id="displayText">💌 ကိုကိုလည်း ကိုကို့ချစ်ဆုံးလေးကို အရမ်းအရမ်းချစ်ပါတယ်ဗျ ရမ်းးးချစ်💕<br><br>အာ....ဘွား မွမွမွမွမွမွ 😘😘🥰🥰</h2>
+      <button class="again-btn" id="againFromText">🔁 Again! 😊</button>
+    </div>
+  </div>
+  <div id="finalHeart" class="hidden">
+    <div class="heart">❤️</div>
+    <h2> ယေးး ကိုကို့ကလေးကချစ်တယ်တဲ့ ကိုကိုလည်းရမ်းးးချစ် 💞</h2>
+    <button class="again-btn" id="againFromHeart">🔁 Again! 😊</button>
+  </div>
+  <div id="finalSad" class="hidden">
+    <div class="sad"> ကိုကို့ကလေးကချစ်ဘူးတဲ့ 💔😭</div>
+    <h2>So Sad...</h2>
+    <button class="again-btn" id="againFromSad">🔁 Again! 😊</button>
+  </div>
+</div>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').then(()=>console.log('SW Registered')).catch(err=>console.log(err)); }
+const startBtn=document.getElementById('startBtn'); const step1=document.getElementById('step1'); const step2a=document.getElementById('step2a'); const textBoxStep=document.getElementById('textBoxStep'); const finalHeart=document.getElementById('finalHeart'); const finalSad=document.getElementById('finalSad');
+startBtn.onclick=()=>{startBtn.classList.add('hidden');step1.classList.remove('hidden');};
+document.getElementById('option1').onclick=()=>{step1.classList.add('hidden');step2a.classList.remove('hidden');};
+document.getElementById('option2').onclick=()=>{step1.classList.add('hidden');textBoxStep.classList.remove('hidden');};
+document.getElementById('option1a').onclick=()=>{step2a.classList.add('hidden');finalHeart.classList.remove('hidden');};
+document.getElementById('option1b').onclick=()=>{step2a.classList.add('hidden');finalSad.classList.remove('hidden');};
+function goBackToStart(){[step1,step2a,textBoxStep,finalHeart,finalSad].forEach(el=>el.classList.add('hidden'));startBtn.classList.remove('hidden');}
+document.getElementById('againFromText').onclick=goBackToStart;
+document.getElementById('againFromHeart').onclick=goBackToStart;
+document.getElementById('againFromSad').onclick=goBackToStart;
+</script>
+</body>
+</html>
